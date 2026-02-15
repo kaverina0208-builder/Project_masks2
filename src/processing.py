@@ -17,6 +17,7 @@ def filter_by_state(accepted_list: list, state: str = "EXECUTED") -> list:
 
 
 print(filter_by_state(accepted_list))
+print()
 
 
 def sort_by_date(accepted_list: list, ascending: bool = True) -> list:
