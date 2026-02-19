@@ -80,20 +80,33 @@ transactions = (
 
 
 def filter_by_currency(lst1, name):
-    # new_lst = [x for x in lst1 if x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name]
     # new_lst = list(filter(lambda x: x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name, lst1))
     for x in lst1:
         if x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name:
             yield x
-    # n = (x for x in lst1 if x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name)
     # yield new_lst
 
+
 usd_transactions = filter_by_currency(transactions, "USD")
-# for i in range(len(transactions)):
-while True:
+for _ in range(2):
     try:
         print(next(usd_transactions))
     except StopIteration:
-        print('Генератор исчерпан')
+        print('Список исчерпан')
         break
 
+print()
+def transaction_descriptions(lst1):
+    for element in lst1:
+        result = element.get('description')
+        yield result
+
+
+descriptions = transaction_descriptions(transactions)
+for _ in range(5):
+    print(next(descriptions))
+
+
+print()
+def card_number_generator(start, stop):
+    pass
