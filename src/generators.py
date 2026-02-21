@@ -79,9 +79,12 @@ transactions = (
 )
 
 
-def filter_by_currency(lst1: list, name: str) -> dict:
+def filter_by_currency(lst1: list, name: str = "USD") -> dict:
     """The function returns transactions where the currency of the operation matches the specified currency."""
     # new_lst = list(filter(lambda x: x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name, lst1))
+    # if len(lst1) == 0:
+    #     print('Список пуст')
+    # else:
     for x in lst1:
         if x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name:
             yield x
@@ -89,7 +92,7 @@ def filter_by_currency(lst1: list, name: str) -> dict:
 
 
 usd_transactions = filter_by_currency(transactions, "USD")
-for _ in range(2):
+for _ in range(len(transactions)):
     try:
         print(next(usd_transactions))
     except StopIteration:
@@ -106,7 +109,11 @@ def transaction_descriptions(lst1: list) -> str:
 
 descriptions = transaction_descriptions(transactions)
 for _ in range(len(transactions)):
-    print(next(descriptions))
+    try:
+        print(next(usd_transactions))
+    except StopIteration:
+        print('Список исчерпан')
+        break
 
 
 print()

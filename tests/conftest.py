@@ -44,7 +44,6 @@ def checklist_4():
             "operationAmount": {
                 "amount": "9824.07",
                 "currency": {
-                    "name": "USD",
                     "code": "USD"
                 }
             },
@@ -114,3 +113,8 @@ def checklist_4():
         }
     ]
 )
+
+@pytest.fixture
+def checklist_empty() -> list:
+    result = []
+    return result

@@ -1,13 +1,39 @@
 import pytest
-from src.generators import card_number_generator, filter_by_currency
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
+from tests.conftest import checklist_empty
 
 
-def test_filter_by_currency_good(checklist_4):
+def test_filter_by_currency_USD(checklist_4):
     n = filter_by_currency(checklist_4)
-    assert  next(n) == {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572', 'operationAmount': {'amount': '9824.07', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Перевод организации', 'from': 'Счет 75106830613657916952', 'to': 'Счет 11776614605963066702'}
+    # assert  next(n) == {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572', 'operationAmount': {'amount': '9824.07', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Перевод организации', 'from': 'Счет 75106830613657916952', 'to': 'Счет 11776614605963066702'}
     assert  next(n) == {'id': 142264268, 'state': 'EXECUTED', 'date': '2019-04-04T23:20:05.206878', 'operationAmount': {'amount': '79114.93', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Перевод со счета на счет', 'from': 'Счет 19708645243227258542', 'to': 'Счет 75651667383060284188'}
-# {'id': 895315941, 'state': 'EXECUTED', 'date': '2018-08-19T04:27:37.904916', 'operationAmount': {'amount': '56883.54', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Перевод с карты на карту', 'from': 'Visa Classic 6831982476737658', 'to': 'Visa Platinum 8990922113665229'},
-# 'Список исчерпан'
+    assert  next(n) == {'id': 895315941, 'state': 'EXECUTED', 'date': '2018-08-19T04:27:37.904916', 'operationAmount': {'amount': '56883.54', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Перевод с карты на карту', 'from': 'Visa Classic 6831982476737658', 'to': 'Visa Platinum 8990922113665229'}
+
+
+def test_filter_by_currency_zero(checklist_4):
+    n = filter_by_currency(checklist_4)
+    assert  next(n) == {'id': 142264268, 'state': 'EXECUTED', 'date': '2019-04-04T23:20:05.206878', 'operationAmount': {'amount': '79114.93', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Перевод со счета на счет', 'from': 'Счет 19708645243227258542', 'to': 'Счет 75651667383060284188'}
+    assert  next(n) == {'id': 895315941, 'state': 'EXECUTED', 'date': '2018-08-19T04:27:37.904916', 'operationAmount': {'amount': '56883.54', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Перевод с карты на карту', 'from': 'Visa Classic 6831982476737658', 'to': 'Visa Platinum 8990922113665229'}
+
+
+# def test_filter_by_currency_empty():
+#     n = filter_by_currency(checklist_empty)
+#     assert next(n) == 'Список исчерпан'
+
+
+def test_transaction_descriptions_correct(checklist_4):
+    n = transaction_descriptions(checklist_4)
+    assert next(n) == 'Перевод организации'
+    assert next(n) == 'Перевод со счета на счет'
+    assert next(n) == 'Перевод со счета на счет'
+    assert next(n) == 'Перевод с карты на карту'
+    assert next(n) == 'Перевод организации'
+
+
+def test_transaction_descriptions(checklist_empty):
+    n = transaction_descriptions(checklist_empty)
+    assert next(n) == 'Список исчерпан'
+
 
 
 @pytest.mark.parametrize("start, stop, expected_cards", [
