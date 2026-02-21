@@ -79,7 +79,7 @@ transactions = (
 )
 
 
-def filter_by_currency(lst1, name):
+def filter_by_currency(lst1: list, name: str) -> dict:
     # new_lst = list(filter(lambda x: x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name, lst1))
     for x in lst1:
         if x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name:
@@ -88,7 +88,7 @@ def filter_by_currency(lst1, name):
 
 
 usd_transactions = filter_by_currency(transactions, "USD")
-for _ in range(2):
+for _ in range(len(transactions)):
     try:
         print(next(usd_transactions))
     except StopIteration:
@@ -96,17 +96,26 @@ for _ in range(2):
         break
 
 print()
-def transaction_descriptions(lst1):
+def transaction_descriptions(lst1: list) -> str:
     for element in lst1:
         result = element.get('description')
         yield result
 
 
 descriptions = transaction_descriptions(transactions)
-for _ in range(5):
+for _ in range(len(transactions)):
     print(next(descriptions))
 
 
 print()
-def card_number_generator(start, stop):
-    pass
+def card_number_generator(start: int, stop: int) -> str:
+    while True:
+        if (start > 0) and (start <= stop):
+            length_result = 16 - len(str(start))
+            length_result_string = '0'*length_result + str(start)
+            yield f'{length_result_string[0:4]} {length_result_string[4:8]} {length_result_string[8:12]} {length_result_string[12:]}'
+            start += 1
+
+
+for card_number in card_number_generator(123456, 123459):
+    print(card_number)
