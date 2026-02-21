@@ -89,7 +89,7 @@ def filter_by_currency(lst1: list, name: str) -> dict:
 
 
 usd_transactions = filter_by_currency(transactions, "USD")
-for _ in range(len(transactions)):
+for _ in range(2):
     try:
         print(next(usd_transactions))
     except StopIteration:
@@ -112,15 +112,17 @@ for _ in range(len(transactions)):
 print()
 def card_number_generator(start: int, stop: int) -> str:
     """The function generates card numbers in the specified range"""
-    while True:
-        if (start > 0) and (start <= stop):
+    if start < 0 or stop < 0:
+        yield 'Введены некорректные данные'
+    else:
+        while start <= stop:
             length_result = 16 - len(str(start))
-            length_result_string = '0'*length_result + str(start)
+            length_result_string = '0' * length_result + str(start)
             yield f'{length_result_string[0:4]} {length_result_string[4:8]} {length_result_string[8:12]} {length_result_string[12:]}'
             start += 1
 
 
-for card_number in card_number_generator(1, 6):
+for card_number in card_number_generator(-3, 9):
     print(card_number)
 
 
