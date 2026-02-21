@@ -80,6 +80,7 @@ transactions = (
 
 
 def filter_by_currency(lst1: list, name: str) -> dict:
+    """The function returns transactions where the currency of the operation matches the specified currency."""
     # new_lst = list(filter(lambda x: x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name, lst1))
     for x in lst1:
         if x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name:
@@ -97,6 +98,7 @@ for _ in range(len(transactions)):
 
 print()
 def transaction_descriptions(lst1: list) -> str:
+    """The function returns a description of each operation in turn"""
     for element in lst1:
         result = element.get('description')
         yield result
@@ -109,6 +111,7 @@ for _ in range(len(transactions)):
 
 print()
 def card_number_generator(start: int, stop: int) -> str:
+    """The function generates card numbers in the specified range"""
     while True:
         if (start > 0) and (start <= stop):
             length_result = 16 - len(str(start))
@@ -117,5 +120,7 @@ def card_number_generator(start: int, stop: int) -> str:
             start += 1
 
 
-for card_number in card_number_generator(123456, 123459):
+for card_number in card_number_generator(1, 6):
     print(card_number)
+
+
