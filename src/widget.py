@@ -13,7 +13,7 @@ def mask_account_card(string_info: str) -> str:
             if symbol.isalpha() or symbol == " ":
                 string_name += symbol
             if symbol.isdigit():
-                string_number = string_info[string_info.index(symbol)]
+                string_number = string_info[string_info.index(symbol):]
                 get_mask_account(string_number)
                 result = string_name + get_mask_account(string_number)
                 break
@@ -22,7 +22,7 @@ def mask_account_card(string_info: str) -> str:
             if symbol.isalpha() or symbol == " ":
                 string_name += symbol
             if symbol.isdigit():
-                string_number = string_info[string_info.index(symbol)]
+                string_number = string_info[string_info.index(symbol):]
                 get_mask_card_number(string_number)
                 result = string_name + get_mask_card_number(string_number)
                 break
