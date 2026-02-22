@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Generator
 
 transactions = [
     {
@@ -72,7 +72,7 @@ for _ in range(len(transactions)):
 print()
 
 
-def transaction_descriptions(lst1: list) -> str:
+def transaction_descriptions(lst1: list) -> Generator:
     """The function returns a description of each operation in turn"""
     for element in lst1:
         result = element.get("description")
@@ -92,7 +92,7 @@ for _ in range(len(transactions)):
 print()
 
 
-def card_number_generator(start: int, stop: int) -> str:
+def card_number_generator(start: int, stop: int) -> Generator:
     """The function generates card numbers in the specified range"""
     if start < 0 or stop < 0:
         yield "Введены некорректные данные"

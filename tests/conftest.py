@@ -34,7 +34,7 @@ def checklist_3() -> list:
 
 
 @pytest.fixture
-def checklist_4():
+def checklist_4() -> list:
     return [
         {
             "id": 939719570,
