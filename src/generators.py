@@ -1,3 +1,5 @@
+from typing import Any
+
 transactions = (
     [
         {
@@ -79,19 +81,19 @@ transactions = (
 )
 
 
-def filter_by_currency(lst1: list, name: str = "USD") -> dict:
+def filter_by_currency(lst1: list, name: str = "USD") -> Any:
     """The function returns transactions where the currency of the operation matches the specified currency."""
-    # new_lst = list(filter(lambda x: x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name, lst1))
-    # if len(lst1) == 0:
-    #     print('Список пуст')
-    # else:
-    for x in lst1:
-        if x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name:
+    new_lst = list(filter(lambda x: x.get("operationAmount", {}).get("currency", {}).get("name", 0) == name, lst1))
+    if len(new_lst) == 0:
+        yield 'Нет операций в такой валюте'
+    else:
+        for x in new_lst:
             yield x
-    # yield new_lst
 
 
-usd_transactions = filter_by_currency(transactions, "USD")
+usd_transactions = filter_by_currency(transactions, "EUR")
+if len(transactions) == 0:
+    print('Список пуст')
 for _ in range(len(transactions)):
     try:
         print(next(usd_transactions))
@@ -108,9 +110,11 @@ def transaction_descriptions(lst1: list) -> str:
 
 
 descriptions = transaction_descriptions(transactions)
+if len(transactions) == 0:
+    print('Список пуст')
 for _ in range(len(transactions)):
     try:
-        print(next(usd_transactions))
+        print(next(descriptions))
     except StopIteration:
         print('Список исчерпан')
         break
@@ -129,7 +133,7 @@ def card_number_generator(start: int, stop: int) -> str:
             start += 1
 
 
-for card_number in card_number_generator(-3, 9):
+for card_number in card_number_generator(9999999999999999, 9999999999999999):
     print(card_number)
 
 

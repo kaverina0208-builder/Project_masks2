@@ -113,8 +113,3 @@ def checklist_4():
         }
     ]
 )
-
-@pytest.fixture
-def checklist_empty() -> list:
-    result = []
-    return result
