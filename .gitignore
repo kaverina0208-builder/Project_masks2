@@ -52,6 +52,8 @@ coverage.xml
 cover/
 mylog.txt
 test_mylog.txt
+htmlcov/
+
 
 # Translations
 *.mo
