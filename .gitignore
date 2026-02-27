@@ -50,6 +50,10 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+mylog.txt
+test_mylog.txt
+htmlcov/
+
 
 # Translations
 *.mo
