@@ -11,18 +11,15 @@ def conversion_amount(transaction_data: dict) -> float:
     response = requests.get(url, headers=headers, params=transaction_data)
 
     if response.status_code != 200:
-        raise ValueError(f"Failed to get currency rate")
-    result = response.json()['result']
-    if not result:
-        raise ValueError(f"No data for currency")
-
+        raise ValueError(f"Не удалось получить курс валюты")
+    result = response.json()
     return result
 
 
 payload = {
     "amount": "1200",
     "from": "EUR",
-    "to": "USD"
+    "to": "RUB"
 }
 if __name__ == '__main__':
     print(conversion_amount(payload))

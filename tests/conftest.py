@@ -82,3 +82,12 @@ def checklist_4() -> list:
             "to": "Счет 14211924144426031657",
         },
     ]
+
+
+@pytest.fixture()
+def checklist_5() -> dict:
+    return {
+    "amount": "1",
+    "from": "EUR",
+    "to": "RUB"
+}
