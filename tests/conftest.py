@@ -86,8 +86,4 @@ def checklist_4() -> list:
 
 @pytest.fixture()
 def checklist_5() -> dict:
-    return {
-    "amount": "1",
-    "from": "EUR",
-    "to": "RUB"
-}
+    return {"amount": "1", "from": "EUR", "to": "RUB"}
