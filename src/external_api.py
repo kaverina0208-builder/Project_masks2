@@ -10,8 +10,8 @@ APY_KEY = os.getenv("APY_KEY")
 def conversion_amount(transaction_data: dict) -> float:
     """The function converts the amount to the desired currency"""
 
-    if tran_data['operationAmount']['currency']['code'] == 'RUB':
-        result = tran_data['operationAmount']['amount']
+    if transaction_data['operationAmount']['currency']['code'] == 'RUB':
+        result = transaction_data['operationAmount']['amount']
 
     else:
         url = "https://api.apilayer.com/exchangerates_data/convert"
@@ -19,8 +19,8 @@ def conversion_amount(transaction_data: dict) -> float:
         headers = {"apikey": f"{APY_KEY}"}
 
         payload = {
-            "amount": tran_data['operationAmount']['amount'],
-            "from": tran_data['operationAmount']['currency']['code'],
+            "amount": transaction_data['operationAmount']['amount'],
+            "from": transaction_data['operationAmount']['currency']['code'],
             "to": "RUB"
         }
 
