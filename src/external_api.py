@@ -9,18 +9,44 @@ APY_KEY = os.getenv("APY_KEY")
 
 def conversion_amount(transaction_data: dict) -> float:
     """The function converts the amount to the desired currency"""
-    url = "https://api.apilayer.com/exchangerates_data/convert"
 
-    headers = {"apikey": f"{APY_KEY}"}
+    if tran_data['operationAmount']['currency']['code'] == 'RUB':
+        result = tran_data['operationAmount']['amount']
 
-    response = requests.get(url, headers=headers, params=transaction_data)
+    else:
+        url = "https://api.apilayer.com/exchangerates_data/convert"
 
-    if response.status_code != 200:
-        raise ValueError(f"Не удалось получить курс валюты")
-    result = response.json()["result"]
+        headers = {"apikey": f"{APY_KEY}"}
+
+        payload = {
+            "amount": tran_data['operationAmount']['amount'],
+            "from": tran_data['operationAmount']['currency']['code'],
+            "to": "RUB"
+        }
+
+        response = requests.get(url, headers=headers, params=payload)
+
+        if response.status_code != 200:
+            raise ValueError(f"Не удалось получить курс валюты")
+        result = response.json()["result"]
     return result
 
 
-payload = {"amount": "1200", "from": "EUR", "to": "RUB"}
+tran_data = {
+  "id": 41428829,
+  "state": "EXECUTED",
+  "date": "2019-07-03T18:35:29.512364",
+  "operationAmount": {
+    "amount": "100",
+    "currency": {
+      "name": "USD",
+      "code": "USD"
+    }
+  },
+  "description": "Перевод организации",
+  "from": "MasterCard 7158300734726758",
+  "to": "Счет 35383033474447895560"
+}
+
 if __name__ == "__main__":
-    print(conversion_amount(payload))
+    print(conversion_amount(tran_data))
