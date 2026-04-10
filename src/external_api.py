@@ -27,7 +27,7 @@ def conversion_amount(transaction_data: dict) -> float:
         response = requests.get(url, headers=headers, params=payload)
 
         if response.status_code != 200:
-            raise ValueError(f"Не удалось получить курс валюты")
+            raise ValueError("Не удалось получить курс валюты")
         result = response.json()["result"]
     return result
 
