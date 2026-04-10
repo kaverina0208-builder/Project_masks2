@@ -8,6 +8,7 @@ ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
 PATH_TO_FILE = os.path.join(ROOT_DIR, "data", "operations.json")
 PATH_TO_FILE_LOG = os.path.join(ROOT_DIR, "logs", "utils.log")
 
+
 logger = logging.getLogger('utils')
 logger.setLevel(logging.DEBUG)
 file_handler = logging.FileHandler(PATH_TO_FILE_LOG, mode='w')
