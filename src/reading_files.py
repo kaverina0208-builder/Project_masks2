@@ -16,10 +16,10 @@ def read_csv(path:str) -> list[dict]:
                 result = []
                 for row in reader:
                     result.append(row)
-            except pd.errors.ParserError as e:
-                raise ValueError(f"Ошибка при чтении файла {path}")
+            except ValueError:
+                result = 'Ошибка при чтении файла'
     except FileNotFoundError:
-        raise FileNotFoundError(f'Файл {path} не найден')
+        result = 'Файл не найден'
     return result
 
 
@@ -34,9 +34,9 @@ def read_excel(path: str) -> list[dict]:
         transactions_exl_list = df_exl.to_dict(orient="records")
         result = transactions_exl_list
     except ValueError:
-        raise ValueError(f'Ошибка при чтении файла {path}')
+        raise ValueError(f'Ошибка при чтении файла')
     except FileNotFoundError:
-        raise FileNotFoundError(f'Файл {path} не найден')
+        raise FileNotFoundError(f'Файл не найден')
     return result
 
 
