@@ -7,23 +7,24 @@ ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
 PATH_TO_FILE_CSV = os.path.join(ROOT_DIR, "data", "transactions.csv")
 PATH_TO_FILE_XLS = os.path.join(ROOT_DIR, "data", "transactions_excel.xlsx")
 
-def read_csv(path:str) -> list[dict]:
+
+def read_csv(path: str) -> list[dict]:
     """The function reads the csv-file"""
     try:
         with open(path, encoding="utf-8") as file:
             try:
-                reader = csv.DictReader(file, delimiter=';')
+                reader = csv.DictReader(file, delimiter=";")
                 result = []
                 for row in reader:
                     result.append(row)
             except ValueError:
-                result = 'Ошибка при чтении файла'
+                result = "Ошибка при чтении файла"
     except FileNotFoundError:
-        result = 'Файл не найден'
+        result = "Файл не найден"
     return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(read_csv(PATH_TO_FILE_CSV))
 
 
@@ -34,11 +35,11 @@ def read_excel(path: str) -> list[dict]:
         transactions_exl_list = df_exl.to_dict(orient="records")
         result = transactions_exl_list
     except ValueError:
-        raise ValueError(f'Ошибка при чтении файла')
+        raise ValueError("Ошибка при чтении файла")
     except FileNotFoundError:
-        raise FileNotFoundError(f'Файл не найден')
+        raise FileNotFoundError("Файл не найден")
     return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(read_excel(PATH_TO_FILE_XLS))
