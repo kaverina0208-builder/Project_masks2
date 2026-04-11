@@ -29,7 +29,8 @@ def mask_account_card(string_info: str) -> str:
     return result
 
 
-print(mask_account_card(string_info="MasterCard 7158300734726758"))
+if __name__ == "__main__":
+    print(mask_account_card(string_info="MasterCard 7158300734726758"))
 
 
 def get_date(date_string_info: str) -> str:
@@ -47,4 +48,5 @@ def get_date(date_string_info: str) -> str:
     return result
 
 
-print(get_date(date_string_info="2024-03-11T02:26:18.671407"))
+if __name__ == "__main__":
+    print(get_date(date_string_info="2024-03-11T02:26:18.671407"))

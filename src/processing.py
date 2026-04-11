@@ -16,8 +16,9 @@ def filter_by_state(accepted_list: list, state: str = "EXECUTED") -> list:
     return new_list
 
 
-print(filter_by_state(accepted_list))
-print()
+if __name__ == "__main__":
+    print(filter_by_state(accepted_list))
+    print()
 
 
 def sort_by_date(accepted_list: list, ascending: bool = True) -> list:
@@ -29,4 +30,5 @@ def sort_by_date(accepted_list: list, ascending: bool = True) -> list:
     return accepted_list
 
 
-print(sort_by_date(accepted_list))
+if __name__ == "__main__":
+    print(sort_by_date(accepted_list))
