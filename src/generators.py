@@ -69,7 +69,7 @@ for _ in range(len(transactions)):
         print("Список исчерпан")
         break
 
-print()
+
 
 
 def transaction_descriptions(lst1: list) -> Generator:
@@ -89,7 +89,7 @@ for _ in range(len(transactions)):
         print("Список исчерпан")
         break
 
-print()
+
 
 
 def card_number_generator(start: int, stop: int) -> Generator:
@@ -108,6 +108,6 @@ def card_number_generator(start: int, stop: int) -> Generator:
             )
             start += 1
 
-
-for card_number in card_number_generator(9999999999999999, 9999999999999999):
-    print(card_number)
+if __name__ == '__main__':
+    for card_number in card_number_generator(9999999999999999, 9999999999999999):
+        print(card_number)
