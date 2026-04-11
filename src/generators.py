@@ -70,8 +70,6 @@ for _ in range(len(transactions)):
         break
 
 
-
-
 def transaction_descriptions(lst1: list) -> Generator:
     """The function returns a description of each operation in turn"""
     for element in lst1:
@@ -90,8 +88,6 @@ for _ in range(len(transactions)):
         break
 
 
-
-
 def card_number_generator(start: int, stop: int) -> Generator:
     """The function generates card numbers in the specified range"""
     if start < 0 or stop < 0:
@@ -108,6 +104,7 @@ def card_number_generator(start: int, stop: int) -> Generator:
             )
             start += 1
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     for card_number in card_number_generator(9999999999999999, 9999999999999999):
         print(card_number)
